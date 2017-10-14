@@ -1,0 +1,130 @@
+# Set super key as $mod
+set $mod Mod4
+
+# Get rid of the ugly window borders
+new_window none
+
+# i3wm font. Not the system font, set up your gtkrc for that
+font pango:Fira Sans 8
+
+# Screen wasting gaps, uncomment if you don't use i3-gaps
+gaps inner 7
+
+
+###############################################################################
+# Basic keybinds
+###############################################################################
+
+# Restart
+bindsym $mod+Shift+r restart
+
+# Kill i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Kill the focused application
+bindsym $mod+q kill
+
+# Fullscreen mode
+bindsym $mod+f fullscreen toggle
+
+# Floating toggle, really only useful for desktop threads
+bindsym $mod+space floating toggle
+
+# Use the mod key to drag floating windows
+floating_modifier $mod
+
+# change focus between tiling / floating windows
+#bindsym $mod+space focus mode_toggle
+
+# Use $mod + arrow keys to move windows around
+bindsym $mod+Left move left
+bindsym $mod+Down move down
+bindsym $mod+Up move up
+bindsym $mod+Right move right
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+
+###############################################################################
+# Resize windows
+###############################################################################
+mode "resize" {
+        bindsym Left resize shrink width 1 px or 1 ppt
+        bindsym Down resize grow height 1 px or 1 ppt
+        bindsym Up resize shrink height 1 px or 1 ppt
+        bindsym Right resize grow width 1 px or 1 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+###############################################################################
+# i3bar
+###############################################################################
+bar {
+	position top
+        status_command i3status
+
+	colors {
+        	background #3B4252
+        	statusline #ffffff
+        	separator #666666
+
+        	focused_workspace  #81A1C1 #81A1C1 #ffffff
+        	active_workspace   #2472ad #2472ad #ffffff
+        	inactive_workspace #3B4252 #3B4252 #ffffff
+        	urgent_workspace   #2f343a #900000 #ffffff
+        	binding_mode       #2f343a #900000 #ffffff
+	}
+
+}
+
+
+###############################################################################
+# Frequent applications
+###############################################################################
+
+bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+m exec gmrun
+bindsym $mod+p exec pcmanfm
+bindsym $mod+b exec firefox
+
+
+###############################################################################
+# Startup items
+###############################################################################
+
+# Muh second display
+exec xrandr | grep 'VGA1 connected' && xrandr --output LVDS1 --auto --output VGA1 --mode 1440x900 --left-of LVDS1 
+
+# Compositor
+exec compton
+
+# Wallpaper thing
+exec nitrogen --restore
