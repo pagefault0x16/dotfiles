@@ -5,10 +5,11 @@ set $mod Mod4
 new_window none
 
 # i3wm font. Not the system font, set up your gtkrc for that
-font pango:Fira Sans 8
+font pango:Open Sans 8
 
 # Screen wasting gaps, uncomment if you don't use i3-gaps
-gaps inner 7
+gaps inner 4
+
 
 
 ###############################################################################
@@ -113,7 +114,7 @@ bar {
 bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+m exec gmrun
 bindsym $mod+p exec pcmanfm
-bindsym $mod+b exec firefox
+bindsym $mod+b exec firefox-developer-edition
 
 
 ###############################################################################
@@ -124,7 +125,7 @@ bindsym $mod+b exec firefox
 exec xrandr | grep 'VGA1 connected' && xrandr --output LVDS1 --auto --output VGA1 --mode 1440x900 --left-of LVDS1 
 
 # Compositor
-exec compton
+#exec compton
 
 # Wallpaper thing
 exec nitrogen --restore
